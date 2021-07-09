@@ -1,0 +1,394 @@
+{
+	"info": {
+		"_postman_id": "6fb1ff6b-03fd-468e-9cca-a959c3963d9f",
+		"name": "MercerOS Datahub AWS",
+		"description": "Dev environment of Datahub kafka cluster in aws",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create a new topic",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "POST /topics/test/partitions/1 HTTP/1.1",
+						"value": "",
+						"disabled": true
+					},
+					{
+						"key": "Host",
+						"value": "https://datahub.merceros.us-east-1.dev.awsapp.mercer.com",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.kafka.binary.v2+json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/vnd.kafka.v2+json, application/vnd.kafka+json, application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"records\": [\n    {\n      \"key\": \"a2V5\",\n      \"value\": \"Y29uZmx1ZW50\"\n    },\n    {\n      \"value\": \"a2Fma2E=\"\n    }\n  ]\n}"
+				},
+				"url": {
+					"raw": "https://datahub.merceros.us-east-1.dev.awsapp.mercer.com/topics/test/partitions/1",
+					"protocol": "https",
+					"host": [
+						"datahub",
+						"merceros",
+						"us-east-1",
+						"dev",
+						"awsapp",
+						"mercer",
+						"com"
+					],
+					"path": [
+						"topics",
+						"test",
+						"partitions",
+						"1"
+					]
+				},
+				"description": "create a new topic by posting to a new topic name. (not a great idea in production but just testing it via apis)"
+			},
+			"response": []
+		},
+		{
+			"name": "publish on BOTF Jira",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "POST /topics/test/partitions/1 HTTP/1.1",
+						"value": "",
+						"disabled": true
+					},
+					{
+						"key": "Host",
+						"value": "https://datahub.merceros.us-east-1.dev.awsapp.mercer.com",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.kafka.json.v2+json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.kafka.avro.v2+json",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/vnd.kafka.v2+json"
+					},
+					{
+						"key": "apikey",
+						"value": "lPB6VUwqKINt2cXOnZGatQ8OzYlHQgLI"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"records\": [\n        \n        {\n          \"value\": {\"ClientOneCd\": \"FIPCLE\", \"ProcessStatusName\": \"Closed\", \"CoverageGroupName\": \"LAD\", \"LineOfCoverageName\": \"Basic Life\", \"LocalOfficeCityName\": \"Philadelphia\", \"LocalOfficeStateCd\": \"PA\", \"AcctEmpName\": \"Matt Klenotic; also Gerry Hoffner, Dan Meenan, and Kelly McCartin\", \"MarketingRequestTypeCd\": \"Renewal\", \"RenewalProviderName\": \"Liberty Mutual Insurance Company\", \"PolicyStartDt\": \"2018-01-01\", \"PolicyEndDt\": \"2019-12-31\"}\n\n        }\n        ]\n        }"
+				},
+				"url": {
+					"raw": "https://datahub.merceros.us-east-1.dev.awsapp.mercer.com/topics/botf_kf_jira",
+					"protocol": "https",
+					"host": [
+						"datahub",
+						"merceros",
+						"us-east-1",
+						"dev",
+						"awsapp",
+						"mercer",
+						"com"
+					],
+					"path": [
+						"topics",
+						"botf_kf_jira"
+					]
+				},
+				"description": "create a new topic by posting to a new topic name. (not a great idea in production but just testing it via apis)"
+			},
+			"response": []
+		},
+		{
+			"name": "create a consumer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "apikey",
+						"value": "lPB6VUwqKINt2cXOnZGatQ8OzYlHQgLI"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.kafka.v2+json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/vnd.kafka.v2+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"kf_consumer\", \"format\": \"json\", \"auto.offset.reset\": \"earliest\"}"
+				},
+				"url": {
+					"raw": "https://datahub.merceros.us-east-1.dev.awsapp.mercer.com/consumers/botf_consumer_group/",
+					"protocol": "https",
+					"host": [
+						"datahub",
+						"merceros",
+						"us-east-1",
+						"dev",
+						"awsapp",
+						"mercer",
+						"com"
+					],
+					"path": [
+						"consumers",
+						"botf_consumer_group",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "publish on BOTF botf_kf_renewal",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "POST /topics/test/partitions/1 HTTP/1.1",
+						"value": "",
+						"disabled": true
+					},
+					{
+						"key": "Host",
+						"value": "https://datahub.merceros.us-east-1.dev.awsapp.mercer.com",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.kafka.json.v2+json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.kafka.avro.v2+json",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/vnd.kafka.v2+json"
+					},
+					{
+						"key": "apikey",
+						"value": "lPB6VUwqKINt2cXOnZGatQ8OzYlHQgLI"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"records\": [\n        \n        {\n          \"value\": {\"MarketingRequestTypeCd\":\"Renewal\",\"ClientOneCd\":\"ACUI03\",\"RenewalProviderName\":\"Cigna Group Insurance\",\"PresentProviderName\":\"Cigna Group Insurance\",\"CoveragesArray\":[{\"CoverageGroupName\":\"LAD\",\"LineOfCoverageName\":\"Basic Life\",\"WinningRateAmount\":\"0.180\",\"CurrentRateAmount\":\"0.180\",\"WinningRateBasisAmountDescr\":\"$1,000\",\"CurrentRateBasisAmountDescr\":\"$1,000\",\"PolicyStartDt\":\"2017-09-01\",\"PolicyEndDt\":\"2019-09-01\",\"PolicyCd\":\"FLX964050\",\"PolicyGuaranteePeriodDescr\":\"24 months\"}]}\n\n        }\n        ]\n        }"
+				},
+				"url": {
+					"raw": "https://datahub.merceros.us-east-1.dev.awsapp.mercer.com/topics/botf_kf_renewal",
+					"protocol": "https",
+					"host": [
+						"datahub",
+						"merceros",
+						"us-east-1",
+						"dev",
+						"awsapp",
+						"mercer",
+						"com"
+					],
+					"path": [
+						"topics",
+						"botf_kf_renewal"
+					]
+				},
+				"description": "create a new topic by posting to a new topic name. (not a great idea in production but just testing it via apis)"
+			},
+			"response": []
+		},
+		{
+			"name": "Get topics",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "apikey",
+						"value": "lPB6VUwqKINt2cXOnZGatQ8OzYlHQgLI"
+					}
+				],
+				"url": {
+					"raw": "https://datahub.merceros.us-east-1.dev.awsapp.mercer.com/topics/prasannatopic3/",
+					"protocol": "https",
+					"host": [
+						"datahub",
+						"merceros",
+						"us-east-1",
+						"dev",
+						"awsapp",
+						"mercer",
+						"com"
+					],
+					"path": [
+						"topics",
+						"prasannatopic3",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create subscription",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.kafka.v2+json"
+					},
+					{
+						"key": "apikey",
+						"value": "lPB6VUwqKINt2cXOnZGatQ8OzYlHQgLI"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"topics\":[\"prasannatopic2\"]}"
+				},
+				"url": {
+					"raw": "https://datahub.merceros.us-east-1.dev.awsapp.mercer.com/consumers/botf_consumer_group/instances/kf_consumer/subscription",
+					"protocol": "https",
+					"host": [
+						"datahub",
+						"merceros",
+						"us-east-1",
+						"dev",
+						"awsapp",
+						"mercer",
+						"com"
+					],
+					"path": [
+						"consumers",
+						"botf_consumer_group",
+						"instances",
+						"kf_consumer",
+						"subscription"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get next record",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.kafka.json.v2+json"
+					},
+					{
+						"key": "apikey",
+						"value": "lPB6VUwqKINt2cXOnZGatQ8OzYlHQgLI"
+					}
+				],
+				"url": {
+					"raw": "https://datahub.merceros.us-east-1.dev.awsapp.mercer.com/consumers/botf_consumer_group1/instances/kf_consumer/records",
+					"protocol": "https",
+					"host": [
+						"datahub",
+						"merceros",
+						"us-east-1",
+						"dev",
+						"awsapp",
+						"mercer",
+						"com"
+					],
+					"path": [
+						"consumers",
+						"botf_consumer_group1",
+						"instances",
+						"kf_consumer",
+						"records"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get next record",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.kafka.json.v2+json"
+							},
+							{
+								"key": "apikey",
+								"value": "lPB6VUwqKINt2cXOnZGatQ8OzYlHQgLI"
+							}
+						],
+						"url": {
+							"raw": "http://usdf23v0212.mrshmc.com:15531/consumers/botf_consumer_group/instances/kf_consumer/",
+							"protocol": "http",
+							"host": [
+								"usdf23v0212",
+								"mrshmc",
+								"com"
+							],
+							"port": "15531",
+							"path": [
+								"consumers",
+								"botf_consumer_group",
+								"instances",
+								"kf_consumer",
+								""
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "211",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/vnd.kafka.json.v2+json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 30 Jul 2018 20:16:00 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Jetty(9.2.24.v20180105)",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"body": "{\"error_code\":50002,\"message\":\"Kafka error: com.fasterxml.jackson.core.JsonParseException: Unrecognized token 'key': was expecting ('true', 'false' or 'null')\\n at [Source: (byte[])\\\"key\\\"; line: 1, column: 7]\"}"
+				}
+			]
+		}
+	]
+}
